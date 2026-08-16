@@ -773,6 +773,37 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 </script>
     
+<audio id="weddingMusic" loop preload="auto">
+  <source src="wedding-song.mp3" type="audio/mpeg">
+</audio>
 
+<button id="musicToggle" aria-label="Toggle music"
+style="position:fixed;bottom:25px;right:25px;width:50px;height:50px;border-radius:50%;border:1px solid #d8b46a;background:#3b2816;color:#f8e8b9;font-size:22px;z-index:9999;cursor:pointer;">
+🎵
+</button>
+<script>
+const music = document.getElementById("weddingMusic");
+const musicToggle = document.getElementById("musicToggle");
+const openInvitation = document.getElementById("openInvitation");
+
+if (openInvitation && music) {
+  openInvitation.addEventListener("click", function () {
+    music.play().catch(() => {});
+    musicToggle.innerHTML = "🔊";
+  });
+}
+
+if (musicToggle && music) {
+  musicToggle.addEventListener("click", function () {
+    if (music.paused) {
+      music.play();
+      musicToggle.innerHTML = "🔊";
+    } else {
+      music.pause();
+      musicToggle.innerHTML = "🎵";
+    }
+  });
+}
+</script>    
 </body>
 </html>
