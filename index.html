@@ -714,8 +714,15 @@ footer p{
 
 
 <script>
+    
+const openingScreen = document.getElementById("openingScreen");
+const openInvitation = document.getElementById("openInvitation");
 
-/* COUNTDOWN */
+openInvitation.addEventListener("click", function () {
+    openingScreen.classList.add("hide");
+});
+
+    /* COUNTDOWN */
 
 const weddingDate =
 new Date("September 7, 2026 06:00:00").getTime();
