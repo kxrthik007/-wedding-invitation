@@ -700,64 +700,79 @@ footer p{
 </footer>
 
 
-<script>
-    
-const openingScreen = document.getElementById("openingScreen");
-const openInvitation = document.getElementById("openInvitation");
 
-openInvitation.addEventListener("click", function () {
-    openingScreen.classList.add("hide");
+    <script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    /* OPEN INVITATION */
+
+    const openingScreen = document.getElementById("openingScreen");
+    const openInvitation = document.getElementById("openInvitation");
+
+    if (openInvitation && openingScreen) {
+        openInvitation.addEventListener("click", function () {
+            openingScreen.classList.add("hide");
+        });
+    }
+
+
+    /* COUNTDOWN */
+
+    const weddingDate = new Date(2026, 8, 7, 18, 0, 0).getTime();
+
+    function updateCountdown() {
+
+        const now = new Date().getTime();
+        const distance = weddingDate - now;
+
+        const days = document.getElementById("days");
+        const hours = document.getElementById("hours");
+        const minutes = document.getElementById("minutes");
+        const seconds = document.getElementById("seconds");
+
+        if (!days || !hours || !minutes || !seconds) {
+            return;
+        }
+
+        if (distance <= 0) {
+            days.innerHTML = "00";
+            hours.innerHTML = "00";
+            minutes.innerHTML = "00";
+            seconds.innerHTML = "00";
+            return;
+        }
+
+        const d = Math.floor(
+            distance / (1000 * 60 * 60 * 24)
+        );
+
+        const h = Math.floor(
+            (distance % (1000 * 60 * 60 * 24)) /
+            (1000 * 60 * 60)
+        );
+
+        const m = Math.floor(
+            (distance % (1000 * 60 * 60)) /
+            (1000 * 60)
+        );
+
+        const s = Math.floor(
+            (distance % (1000 * 60)) /
+            1000
+        );
+
+        days.innerHTML = String(d).padStart(2, "0");
+        hours.innerHTML = String(h).padStart(2, "0");
+        minutes.innerHTML = String(m).padStart(2, "0");
+        seconds.innerHTML = String(s).padStart(2, "0");
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
 });
-
-/* COUNTDOWN */
-
-const weddingDate = new Date(2026, 8, 7, 18, 0, 0).getTime();
-
-function updateCountdown() {
-    const now = new Date().getTime();
-    const distance = weddingDate - now;
-
-    const daysEl = document.getElementById("days");
-    const hoursEl = document.getElementById("hours");
-    const minutesEl = document.getElementById("minutes");
-    const secondsEl = document.getElementById("seconds");
-
-    if (!daysEl || !hoursEl || !minutesEl || !secondsEl) {
-        return;
-    }
-
-    if (distance <= 0) {
-        daysEl.innerHTML = "00";
-        hoursEl.innerHTML = "00";
-        minutesEl.innerHTML = "00";
-        secondsEl.innerHTML = "00";
-        return;
-    }
-
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor(
-        (distance % (1000 * 60 * 60 * 24)) /
-        (1000 * 60 * 60)
-    );
-    const minutes = Math.floor(
-        (distance % (1000 * 60 * 60)) /
-        (1000 * 60)
-    );
-    const seconds = Math.floor(
-        (distance % (1000 * 60)) /
-        1000
-    );
-
-    daysEl.innerHTML = String(days).padStart(2, "0");
-    hoursEl.innerHTML = String(hours).padStart(2, "0");
-    minutesEl.innerHTML = String(minutes).padStart(2, "0");
-    secondsEl.innerHTML = String(seconds).padStart(2, "0");
-}
-
-updateCountdown();
-setInterval(updateCountdown, 1000);
-
 </script>
+    
 
 </body>
 </html>
